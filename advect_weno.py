@@ -114,7 +114,7 @@ def plot_solution(ts, xs, us, ts_1 = None, xs_1 = None, us_1 = None):
             ax1 = fig.add_subplot(111)
             ax1.plot(xs, solution_at_time(ts[j], xs, func), linewidth = 7, label = "Analytic, t=%.2f" %ts[j], zorder=1)
             ax1.plot(xs, us[j], '.', markersize='50', label = "Numeric, t=%.2f" %ts[j], zorder = 0)
-            ax1.set_title(r'$\rm N_{cells} = %04d, \ with \  \mathcal{O}(\delta x ^5) \ convergence$' %len(xs), y=1.05)
+            ax1.set_title(r'$\rm N_{cells} = %04d, \ with \ WENO$' %len(xs), y=1.05)
             ax1.legend(loc = 'lower right')
             ax1.set_xlabel(r'$\rm x$', fontsize = 60)
             ax1.set_ylabel(r'$\rm \rho$', labelpad = 35, fontsize = 60)
@@ -134,14 +134,14 @@ def plot_solution(ts, xs, us, ts_1 = None, xs_1 = None, us_1 = None):
             ax2 = fig.add_subplot(212)
             ax2.plot(xs_1, solution_at_time(ts_1[j], xs_1, func), linewidth = 7, label = "Analytic, t=%.2f" %ts_1[j], zorder=1)
             ax2.plot(xs_1, us_1[j], '.', markersize='50', label = "Numeric, t=%.2f" %ts[j], zorder = 0)
-            ax2.set_title(r'$\rm N_{cells} = %04d, \ with \  \mathcal{O}(\delta x ^5) \ convergence$' %len(xs_1), y=1.05)
+            ax2.set_title(r'$\rm N_{cells} = %04d, \ without \ WENO$' %len(xs), y=1.05)
             ax2.legend(loc = 'lower right')
             #ax2.set_xlabel(r'$\rm x$', fontsize = 60)
             #ax2.set_ylabel(r'$\rm \rho$', labelpad = 35, fontsize = 60)
 
             ax1.plot(xs, solution_at_time(ts[j], xs, func), linewidth = 7, label = "Analytic, t=%.2f" %ts[j], zorder=1)
             ax1.plot(xs, us[j], '.', markersize='50', label = "Numeric, t=%.2f" %ts[j], zorder = 0)
-            ax1.set_title(r'$\rm N_{cells} = %04d, \ with \  \mathcal{O}(\delta x ^5) \ convergence$' %len(xs), y=1.05)
+            ax1.set_title(r'$\rm N_{cells} = %04d, \ with \ WENO$' %len(xs), y=1.05)
             ax1.legend(loc = 'lower right')
             #ax1.set_xlabel(r'$\rm x$', fontsize = 60)
             #ax1.set_ylabel(r'$\rm \rho$', labelpad = 35, fontsize = 60)
@@ -187,15 +187,12 @@ if __name__ == "__main__":
             ts, xs, us, L2 = evolve_with_num_cells(n_cells, func, compute_du = compute_du_weno)
             L2s.append(L2)
         np.savetxt('L2.txt', np.array(L2s))
-        #make L2 convergence plot:
         L2_plot(all_res,L2s)
 
-    #make plots for 1st order convergence scheme at 3200 cells, and
-    # 5th order convergence scheme at 100 cells
     if first_order == 'n':
-        ts, xs, us, L2 = evolve_with_num_cells(num_cells, func, compute_du = compute_du_upwind)
+        ts, xs, us, L2 = evolve_with_num_cells(num_cells, func, compute_du = compute_du_weno)
         plot_solution(ts, xs, us)
     if first_order == 'y':
-        ts, xs, us, L2 = evolve_with_num_cells(num_cells, func, compute_du = compute_du_upwind)
+        ts, xs, us, L2 = evolve_with_num_cells(num_cells, func, compute_du = compute_du_weno)
         ts_1, xs_1, us_1, L2_1 = evolve_with_num_cells(num_cells, func, compute_du = compute_du_upwind)
         plot_solution(ts, xs, us, ts_1 = ts_1, xs_1 = xs_1, us_1 = us_1)
