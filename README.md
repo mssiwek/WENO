@@ -17,38 +17,44 @@ Python3, numpy, matplotlib.pyplot
 Clone the repository and ensure all required libraries are installed.
 Then simply run the 1-D advection code by opening a terminal in the WENO directory and typing:
 ```
-python advect_weno.py
+>> python advect_weno.py
+>> 
 ```
 
 The code asks for several input arguments:
 
 ```
-Which IC function do you want to advect? Examples include: gaussian, simple_step, square_well, quadratic_well, trig_disc. See test_functions.py for more info.
+>> Which IC function do you want to advect? Examples include: gaussian, simple_step, square_well, quadratic_well, trig_disc. See test_functions.py for more info.
+>>
 ```
 
 Respond by choosing one of the functions you want to advect. Second, you will be asked for the resolution:
 
 ```
-At which resolution?
+>> At which resolution?
+>>
 ```
 
 Type an integer number of grid vertices. Then, decide if you want to calculate, store and plot the L2 error for a convergence test.
 
 ```
-Do you want to plot the L2 error? This may take some time. [y/n]
+>> Do you want to plot the L2 error? This may take some time. [y/n]
+>>
 ```
 
 Type y or n. Calculating the L2 error will take some time for high resolutions.
 
 ```
-End time:
+>> End time:
+>>
 ```
 
 Choose for how long the wave pulse should be advected. The default wavespeed is 1, so t_final = 2 is equivalent to one cycle.
 Finally, in addition to the 5th order convergent WENO method you can show a 1st order convergent in the same figure for comparison:
 
 ```
-Do you also want to plot the first order solution for comparison? [y/n]
+>> Do you also want to plot the first order solution for comparison? [y/n]
+>>
 ```
 
 Type y or n.
