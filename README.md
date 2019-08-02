@@ -1,16 +1,16 @@
 # WENO in python3
 
-This repository contains the python library weno.py which contains WENO functions
+A python library weno.py which contains WENO functions
 that take a 5 point stencil of cell-centered hydrodynamical quantities as input and
 return a 5-th order non-linearly weighted polynomial which numerically approximates
 solutions of hyperbolic conservation laws to 5-th order convergence in smooth regions.
 This fit becomes 1st order accurate around discontinuities, but avoids
-oscillatory behaviour by essentially discarding stencils that contain discontinuities.
+oscillatory behaviour by discarding stencils that contain discontinuities.
 The repository further contains a 1-D advection code that demonstrates the WENO method: advect_weno.py
 
 ### Prerequisites
 
-Python3, numpy, matplotlib.pyplot
+Python3, numpy, matplotlib.pyplot, ffmpeg
 
 ## Installation
 
@@ -51,7 +51,8 @@ Finally, in addition to the 5th order convergent WENO method you can show a 1st 
 >> Do you also want to plot the first order solution for comparison? [y/n]
 ```
 
-Type y or n.
+Type y or n. Figures showing the traveling wavepulse (and, optionally, the L2 error) are created in the plots directory,
+and are finally stored as a video in 'videos'.
 
 ## Authors
 
